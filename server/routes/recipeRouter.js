@@ -83,6 +83,12 @@ router.delete('/:id', (req, res) => { //--------------------checked
     }   
 );
 
-
+router.get('/', (req, res) => {  //------------------checked
+	const decoded = jwt.decode(req.query.token);
+	    Recipe.findAll()
+	    .then(recipe => res.status(200).send(recipe))
+	    .catch(error => res.status(400).send(error));
+    } 
+);
 
 module.exports = router;
