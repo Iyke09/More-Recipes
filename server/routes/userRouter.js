@@ -19,6 +19,7 @@ router.post('/signup', (req, res) => {   //--------------------------checked
         .catch(error => res.status(400).send(error.toString()))
     } 
 );
+
 router.post('/signin', (req, res) => { //----------------------------checked
 	User.findOne({
 		where:{
