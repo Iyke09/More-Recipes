@@ -58,6 +58,31 @@ router.put('/:id', (req, res) => { //--------------------------checked
     }  //------------------------checked
 );
 
+router.delete('/:id', (req, res) => { //--------------------checked
+	let decoded = jwt.decode(req.query.token);
+	    Recipe.findById(req.params.id)
+	    .then(recipe => {
+	        if (!recipe) {
+		        return res.status(404).send({
+		            message: 'recipe Not Found',
+		        });
+	        }
+	        if (recipe.user != decoded.user.id) {
+	            return res.status(401).json({
+	                message: 'Not Authenticated'
+	            });
+	        }
+		    return recipe
+		        .destroy()
+		        .then(() => res.status(204).send({
+		        	message:'recipe deleted!'
+		        })) 
+		        .catch((error) => res.status(400).send(error));
+	    })
+	    .catch(error => res.status(400).send(error));
+    }   
+);
+
 
 
 module.exports = router;
