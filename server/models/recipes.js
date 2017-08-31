@@ -7,11 +7,13 @@ module.exports = (sequelize, DataTypes) => {
     upvote: DataTypes.INTEGER,
     downvote: DataTypes.INTEGER,
     userId: DataTypes.INTEGER
-  }, {
-    classMethods: {
-      associate: (models) => {
-      }
-    }
   });
+
+  Recipe.associate = (models) => {
+    Recipe.belongsTo(models.User, {
+      foreignKey: 'userId',
+      as:'recipes'
+    })
+  };
   return Recipe;
 };

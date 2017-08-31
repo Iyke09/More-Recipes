@@ -3,23 +3,25 @@ module.exports = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING,
         unique:true,
-        validation: {
+        validate: {
           isEmail: true
         }
       },
       password: {
         type: DataTypes.STRING,
         allowNull:false,
-        validation: {
+        validate: {
           min: 6
         }
       },
-  }, {
-    classMethods: {
-      associate: (models) => {
-        // associations can be defined here
-      },
-    },
   });
+
+  User.associate = (models) => {
+    User.hasMany(models.Recipe, {
+      foreignKey:'userId',
+      as:'recipes'
+    })
+  };
   return User;
 };
+

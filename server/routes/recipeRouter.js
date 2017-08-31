@@ -17,10 +17,6 @@ router.post('/', (req, res) => { //-----------------------------checked
       		userId: decoded.user.id,
       	})
         .then(todo => res.status(201).send(todo))
-        	// todo.update({
-        	// 	ingredients:todo.ingredients.push(req.body.ingred)
-        	// }))
-        	// .catch(error => res.status(400).send(error.toString()))
         .catch(error => res.status(400).send(error.toString()))
     } 
 );
@@ -46,7 +42,7 @@ router.put('/:id', (req, res) => { //--------------------------checked
 		            category: req.body.category || todo.category,    //chinese
 		            upvote:req.body.upvote || recipe.upvote, 
 		      		downvote:req.body.downvote || recipe.downvote,
-		      		user: decoded.user.id || recipe.user,
+		      		userId: decoded.user.id || recipe.user,
 		      		favorite: req.body.fav
 		        })
 		        .then(() => res.status(200).send({
