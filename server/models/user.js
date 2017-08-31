@@ -1,10 +1,22 @@
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
-    email: DataTypes.STRING,
-    password: DataTypes.STRING,
+      email: {
+        type: DataTypes.STRING,
+        unique:true,
+        validation: {
+          isEmail: true
+        }
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull:false,
+        validation: {
+          min: 6
+        }
+      },
   }, {
     classMethods: {
-      associate: () => {
+      associate: (models) => {
         // associations can be defined here
       },
     },

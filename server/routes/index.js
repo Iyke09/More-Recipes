@@ -1,10 +1,11 @@
 import express from 'express';
-import user from './user';
+import user from './userRouter';
+import recipe from './recipeRouter';
 
-const v1 = express.Router();
+const route = express.Router();
 
-v1.use('/v1',user)
-// v1.use('/v1/recipe',recipe)
+route.use('/users',user);
+route.use('/recipes',recipe);
 
-module.exports = v1;
-console.log(kdssds);
+module.exports = route;
+

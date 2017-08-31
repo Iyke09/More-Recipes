@@ -40,8 +40,10 @@
     "supertest": "^3.0.0"
   },
   "dependencies": {
+    "bcryptjs": "^2.4.3",
     "body-parser": "^1.17.2",
     "express": "^4.15.4",
+    "jsonwebtoken": "^7.4.3",
     "morgan": "^1.8.2",
     "pg": "^7.2.0",
     "pg-hstore": "^2.3.2",
