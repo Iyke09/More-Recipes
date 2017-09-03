@@ -4,15 +4,33 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     description: DataTypes.STRING,
     category: DataTypes.STRING,
-    upvote: DataTypes.INTEGER,
-    downvote: DataTypes.INTEGER,
-    userId: DataTypes.INTEGER
+    userId: DataTypes.INTEGER,
+    favUser: DataTypes.ARRAY(DataTypes.STRING),
   });
+
+  // Recipe.associate = (models) => {
+  //   Recipe.hasMany(models.Comment, {
+  //     foreignKey:'recipeId',
+  //     as:'comments'
+  //   })
+  // };
+  // Recipe.associate = (models) => {
+  //   Recipe.hasMany(models.Votes,{
+  //     foreignKey:'recipeId',
+  //     as:'votes'
+  //   })
+  // };
+  Recipe.associate = (models) => {
+    Recipe.hasMany(models.Favorite, {
+      foreignKey: 'recipeId',
+      as:'favorites'
+    })
+  };
 
   Recipe.associate = (models) => {
     Recipe.belongsTo(models.User, {
       foreignKey: 'userId',
-      as:'recipes'
+      onDelete: 'CASCADE'
     })
   };
   return Recipe;
